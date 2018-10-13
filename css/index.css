@@ -2,7 +2,7 @@
 	text-align: right;
 }
 
-img.no-borders {
+.no-borders {
 	border: none !important; 
 	background: none !important; 
 	box-shadow: none !important;
