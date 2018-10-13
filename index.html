@@ -7,7 +7,10 @@
 		<title>reveal.js</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/blood.css" id="theme">
+
+
+		<link rel="stylesheet" href="css/index.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +27,97 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<img class="no-borders" src="images/logo.svg"></img>
+				</section>
+				<section>
+					<h2>Node.js</h2>
+					<blockquote cite="https://nodejs.org/en/">
+						&ldquo;Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine&rdquo;
+						<div class="text-right">
+							<span class="text-right">nodejs.org</span>
+						</div>
+					</blockquote>
+					<aside class="notes">
+						Node is widely used by websites like Netflix, Airbnb, Twitter, PayPal, Walmart, Yahoo! and more.
+						Node.js ranks as the fourth most important open source project
+						https://foundation.nodejs.org/about
+						https://nodejs.org/en/about/
+					</aside>
+				</section>
+				<section>
+					<h2>First of all</h2>
+					<p>
+						Node is JavaScript for servers
+					</p>
+				</section>
+				<section data-state="chart_trend_iframe">
+					<section>
+						<h2>Why</h2>
+						<p>
+							So, why even bother when there is Java, C#, Python, Ruby e.t.c frameworks?
+						</p>
+					</section>
+					<section>
+						<iframe id="chart_trend" src="http://www.internetlivestats.com/total-number-of-websites/#chart_trend"  width="700" height="375"></iframe>
+					</section>
+					<aside class="notes">
+						2009. So well known frameworks like Django, Ruby or Rails, ASP.NET, Spring and even larger number of different web servers, sevlet containers and other staff already provided the world with over 2 hundreds millions of websites. 
+
+						https://nodejs.org/en/about/
+					</aside>
+				</section>
+				<section>
+					<h2>Event loop</h2>
+					<img class="no-borders" src="images/iwan_05-100755063-orig.png" width="80%" height="80%"> </img>
+
+					<p><a href="https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/">nodejs.org - Blocking vs. Non-Blocking</a></p>
+					<aside class="notes">
+						By the way in Java non blocking network interaction was added only in SE7 and that is 2011. 
+						https://nodejs.org/en/about/
+						Event-driven programming
+						https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
+						(Or on Russian https://medium.com/devschacht/event-loop-timers-and-nexttick-18579cd122e0 )
+
+						All of this makes Node.js a great tool for hosting frontend content whereas all of hard work (calculations, heavy processing) is performed on more suitable platforms - Java, C#...
+					</aside>
+				</section>
+				<section>
+					<h2>Hello World NodeJS http server</h2>
+					<pre>
+						<code data-trim data-noescape>
+							const http = require('http');
+
+							const hostname = '127.0.0.1';
+							const port = 3000;
+
+							const server = http.createServer((req, res) => {
+							  res.statusCode = 200;
+							  res.setHeader('Content-Type', 'text/plain');
+							  res.end('Hello World\n');
+							});
+
+							server.listen(port, hostname, () => {
+							  console.log(`Server running at http://${hostname}:${port}/`);
+							});
+						</code>
+					</pre>
+				</section>
+				<section>
+					<h2>What is Node besides web server?</h2>
+				</section>
+				<section>
+					<h2>NodeJS in a nutshell</h2>
+					<ul>
+						<li>Open source & cross-platform project</li>
+						<li>Build on Chrome's JavaScript runtime environment</li>
+						<li>Event driven & Non-blocking IO</li>
+						<li>Single threaded</li>
+						<li>Build in Async IO, HTTP/s, file-system etc</li>
+						<li>Ability to do JavaScript on server</li>
+						<li>Modules</li>
+					</ul>
+				</section>
 			</div>
 		</div>
 
@@ -37,6 +129,7 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+				history: true,
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
@@ -44,6 +137,12 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
+			Reveal.addEventListener('chart_trend_iframe', function() {
+				var frameElement = document.getElementById("chart_trend");
+				var frameDoc = frameElement.contentWindow.document || frameEle.contentDocument;
+
+				frameDoc.getElementById("chart_trend").focus();
+			} );
 		</script>
 	</body>
 </html>

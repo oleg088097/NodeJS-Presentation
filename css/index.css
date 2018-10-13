@@ -1,0 +1,9 @@
+.text-right {
+	text-align: right;
+}
+
+img.no-borders {
+	border: none !important; 
+	background: none !important; 
+	box-shadow: none !important;
+}
