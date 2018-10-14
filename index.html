@@ -114,28 +114,28 @@
 				</section>
 				<section>
 					<h2>Echo NodeJS server</h2>
-					<pre class="no-borders">
-						<code  data-trim data-noescape>
+					<pre class="no-borders" style="font-size: 0.5em !important;" >
+						<code data-trim data-noescape style="max-height: none;">
 							const http = require('http');
 							const hostname = '127.0.0.1';
 							const port = 3000;
 							const server = http.createServer(function (request,response) {
-								let body = [];
-								request.on('error', (err) => {
-									console.error(err);
-								}).on('data', (chunk) => {
-									body.push(chunk);
-								}).on('end', () => {
-									body = Buffer.concat(body).toString();
-									response.on('error', (err) => {
-										console.error(err);
-									});
-								response.write(body);
-								response.end();
-								});
+							  let body = [];
+							  request.on('error', (err) => {
+							    console.error(err);
+							  }).on('data', (chunk) => {
+								  body.push(chunk);
+							  }).on('end', () => {
+							    body = Buffer.concat(body).toString();
+							    response.on('error', (err) => {
+							  	  console.error(err);
+							    });
+							    response.write(body);
+							    response.end();
+							  });
 							});
 							server.listen(port, hostname, () =>{
-								console.log(`Server running at http://${hostname}:${port}`);
+							  console.log(`Server running at http://${hostname}:${port}`);
 							});
 						</code>
 					</pre>
