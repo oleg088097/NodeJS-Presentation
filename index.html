@@ -167,8 +167,7 @@
     });
     Reveal.addEventListener('chart_trend_iframe', function() {
         var frameElement = document.getElementById("chart_trend");
-        var frameDoc = frameElement.contentWindow.document || frameElement.contentDocument;
-
+        var frameDoc = frameElement.contentWindow.document || frameEle.contentDocument;
         frameDoc.getElementById("chart_trend").focus();
     } );
 </script>
