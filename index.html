@@ -113,6 +113,34 @@
 					</pre>
 				</section>
 				<section>
+					<h2>Echo NodeJS server</h2>
+					<pre class="no-borders">
+						<code  data-trim data-noescape>
+							const http = require('http');
+							const hostname = '127.0.0.1';
+							const port = 3000;
+							const server = http.createServer(function (request,response) {
+								let body = [];
+								request.on('error', (err) => {
+									console.error(err);
+								}).on('data', (chunk) => {
+									body.push(chunk);
+								}).on('end', () => {
+									body = Buffer.concat(body).toString();
+									response.on('error', (err) => {
+										console.error(err);
+									});
+								response.write(body);
+								response.end();
+								});
+							});
+							server.listen(port, hostname, () =>{
+								console.log(`Server running at http://${hostname}:${port}`);
+							});
+						</code>
+					</pre>
+				</section>
+				<section>
 					<h2>What is Node besides web server?</h2>
 				</section>
 				<section>
