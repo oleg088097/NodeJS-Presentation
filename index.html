@@ -68,19 +68,28 @@
 					</aside>
 				</section>
 				<section>
-					<h2>Event loop</h2>
-					<img class="no-borders" src="images/iwan_05-100755063-orig.png" width="80%" height="80%"> </img>
+					<section>
+						<h2>Event loop</h2>
+						<img class="no-borders" src="images/iwan_05-100755063-orig.png" width="80%" height="80%"> </img>
 
-					<p><a href="https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/">nodejs.org - Blocking vs. Non-Blocking</a></p>
-					<aside class="notes">
-						By the way in Java non blocking network interaction was added only in SE7 and that is 2011. 
-						https://nodejs.org/en/about/
-						Event-driven programming
-						https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
-						(Or on Russian https://medium.com/devschacht/event-loop-timers-and-nexttick-18579cd122e0 )
+						<p><a href="https://nodejs.org/en/docs/guides/blocking-vs-non-blocking/">nodejs.org - Blocking vs. Non-Blocking</a></p>
+						<aside class="notes">
+							By the way in Java non blocking network interaction was added only in SE7 and that is 2011. 
+							https://nodejs.org/en/about/
+							Event-driven programming
+							https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
+							(Or on Russian https://medium.com/devschacht/event-loop-timers-and-nexttick-18579cd122e0 )
+							https://www.toptal.com/nodejs/why-the-hell-would-i-use-node-js
 
-						All of this makes Node.js a great tool for hosting frontend content whereas all of hard work (calculations, heavy processing) is performed on more suitable platforms - Java, C#...
-					</aside>
+							All of this makes Node.js a great tool for hosting frontend content whereas all of hard work (calculations, heavy processing) is performed on more suitable platforms - Java, C#...
+						</aside>
+					</section>
+					<section>
+						<img class="no-borders" src="images/traditional.png" width="80%" height="80%"> </img>
+					</section>
+					<section>
+						<img class="no-borders" src="images/node.png" width="80%" height="80%"> </img>
+					</section>
 				</section>
 				<section>
 					<h2>Hello World NodeJS http server</h2>
@@ -105,6 +114,119 @@
 				</section>
 				<section>
 					<h2>What is Node besides web server?</h2>
+				</section>
+				<section>
+					<section>
+						<h2>Module system</h2>
+					</section>
+					<section>
+						<h3>ECMAScript 6</h3>
+						<pre class="no-borders">
+							<code data-trim data-noescape>	
+								// File log.js
+								const log = () => {
+								  console.log('Example of ES module system');
+								}
+								export default log
+
+								// File index.js
+								import log from "./log"
+								log();
+							</code>
+						</pre>
+						<aside class="notes">
+							That's the best way. Simple to use, looks pretty and habitually for your eyes. BUT it doesn't work. Well, it works, but only on narrow circle of browsers.
+							https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Statements/import
+						</aside>
+					</section>
+					<section>
+						<h3>Node CommonJS</h3>
+						<pre class="no-borders">
+							<code data-trim data-noescape>
+								// File log.js
+								function log(){
+								  console.log('Example of CJS module system');
+								}
+								// expose log to other modules
+								module.exports = { log }
+
+								// File index.js
+								var logModule = require('./log');
+								logModule.log();
+							</code>
+						</pre>
+						<aside class="notes">
+							Not exactly "import" and "export" you expect, but works. Only on server side.
+						</aside>
+					</section>
+					<section>
+						<h3>Node Experimantal ECMAScript Modules</h3>
+						<pre class="no-borders">
+							<code data-trim data-noescape>
+								// File log.mjs
+								function log(){
+									console.log("Example of Node ECMAScript Modules");
+								}
+								// expose log to other modules
+								export default log;
+
+								// File bar.mjs
+								import log from './log.mjs';
+								log();
+							</code>
+						</pre>
+						<aside class="notes">
+							That's better. "import" and "export", just the way you like and all CommonJS, JSON, and C++ modules can be used with import. But still only on server side. And .mjs extension, yes.
+						</aside>
+					</section>
+					<section>
+						<h3>RequireJS AMD</h3>
+						<pre class="no-borders">
+							<code data-trim data-noescape>
+								// File log.js
+								define(['logModule'], function(){
+								    // export (expose) foo for other modules
+								    return {
+								        log: function(){
+								          console.log('Example of AMD module system');    
+								      }
+								    };
+								 });
+
+								// File index.js
+								require(['log'], function (logModule) {
+								  logModule.log();
+								});
+							</code>
+						</pre>
+						<aside class="notes">
+							Kinda strange, don't you think? It work only with RequireJS lib, but works. You may even want to use this lib on your NodeJS server, that's complitely possible.
+						</aside>
+					</section>
+					<section>
+						<h2>What will we do?</h2>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Node package manager</h2>
+						<img class="no-borders" src="https://cdn-images-1.medium.com/max/1600/0*A47ZVKudfCOCBbyx.png" >
+					</section>
+					<section>
+						<img class="no-borders" src="images/mostInstalled.png">
+					</section>
+					<section>
+						<h2>So, what will we do with our modules problem?</h2>
+						<p>
+							Transpile, Bundle, Build and Deloy. 
+						</p>
+						<p>
+							If you want to know details, please, visit 
+						</p>
+						<p>
+							<a href="https://medium.freecodecamp.org/anatomy-of-js-module-systems-and-building-libraries-fadcd8dbd0e">Free Code Camp</a>
+						</p>
+					</section>
 				</section>
 				<section>
 					<h2>NodeJS in a nutshell</h2>
